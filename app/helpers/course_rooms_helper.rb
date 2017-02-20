@@ -1,0 +1,2 @@
+module CourseRoomsHelper
+end
