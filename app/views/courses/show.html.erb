@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    font-family: "Lato", sans-serif;
+    background-color: #F2F3F4;
+}
+
+
+</style>
+
+</head>
+<body>
+<div class = "header">
+<div class="container">
+  <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div id="imaginary_container"> 
+                <div class="input-group stylish-input-group">
+                    <input type="text" class="form-control"  placeholder="Search" >
+                    <span class="input-group-addon">
+                        <button type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>  
+                    </span>
+                </div>
+            </div>
+        </div>
+  </div>
+<br>
+</div>
+
+</div>
+<center><h2><font color="#99A3A4"><%= @course.name %></font></h2></center>
+</div>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+    <img class ="cover" src = "<%= @course.cover %>" >
+    </div>
+    <div class="col-md-3">
+      <div class="verticalLine">
+      <div>
+        <h4>Course Category: <font color = "blue"><%= @department.name %> </font></h4>
+      </div>
+      <div>
+        <p align= "left"> <b>Course Description:</b> <%= @course.long_description %> </font></h4></p><br>
+      </div>
+      <div>
+        <b>Start Date: <font color = "red">TBD </font> </b>
+      </div> <br>
+      <div>
+        <b>End Date: <font color = "Green">TBD</font> </b> <br><br>
+      </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+        <div class="verticalLine">
+         <center> <div>
+            Number of students in the class: #### <br><br>
+            Course Teacher: TBD<br><br><br><br>
+            <button type="button" class = "btn btn-<%= ["success", "info", "danger", "primary", "warning"].sample %> btn-block">Register Now!</button>
+          </div></center>
+
+        </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+<br><br><br><br><br>
+<h5><center><p>&copy; 2017 Register<p></center></h5>
+</body>
+
+</html> 

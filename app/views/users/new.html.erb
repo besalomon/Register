@@ -1,0 +1,65 @@
+<center><h1> Create an Account </h1></center>
+
+<div class="col-md-3">
+
+</div>
+
+<div class = "col-md-6">
+
+<%= form_tag"/users", :class => "signup", method: :post do %>
+  <div class="form-group">
+    <label for="first_name">First Name</label>
+    <input type="text" class="form-control" id="FirstName" aria-describedby="FirstName" placeholder="Enter your first name" name ="first_name">
+    <small id="FirstNameHelp" class="form-text text-muted" >Eg: Salomon</small>
+  </div>
+  <div class="form-group">
+    <label for="last_name">Last Name</label>
+    <input type="text" class="form-control" id="LastName" aria-describedby="LastName" placeholder="Enter your last name" name="last_name">
+    <small id="LastNameHelp" class="form-text text-muted" >Eg: Beza</small>
+  </div>
+<div class="form-group">
+    <label for="phone_number">Phone Number</label>
+    <input type="text" class="form-control" id="PhoneNumber" aria-describedby="PhoneNumber" placeholder="Enter your phone number" name="phone">
+    <small id="PhoneNumberHelp" class="form-text text-muted">Eg: +250725897302</small>
+  </div>
+
+  <div>
+    <label for="DOB">Date of Birth</label>
+    <input type="date" name="date">
+
+  </div><br>
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name ="email">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name = "password">
+  </div>
+  <div class="form-group">
+    <label for="passwordconfirmation">Password Confirmation</label>
+    <input type="password" class="form-control" id="passwordconfirmation" placeholder="Password" name="password_confirmation">
+  </div>
+  
+  <div class="form-group">
+    <label for="exampleTextarea">Biography</label>
+    <textarea class="form-control" id="exampleTextarea" rows="3" name="bio"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="ImageURL">Image Url</label>
+    <input type="text" class="form-control" id="ImageURL" aria-describedby="PhoneNumber" placeholder="Enter the image url" name = "photo">
+  </div>
+
+  </fieldset>
+  <button type="submit" class="btn btn-primary">Sign Up</button>
+</form>
+
+</div>
+<% end %>
+<div class = "col-md-3">
+  
+
+</div>

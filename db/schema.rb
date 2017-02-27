@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170220133155) do
+ActiveRecord::Schema.define(version: 20170225075934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 20170220133155) do
   create_table "course_departments", force: :cascade do |t|
     t.integer  "course_id"
     t.integer  "department_id"
-    t.string   "name"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
@@ -35,19 +34,22 @@ ActiveRecord::Schema.define(version: 20170220133155) do
 
   create_table "courses", force: :cascade do |t|
     t.string   "name"
-    t.integer  "created_by"
+    t.integer  "user_id"
     t.integer  "max_number"
     t.integer  "min_number"
     t.boolean  "series"
     t.datetime "start_date"
     t.datetime "end_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "cover"
+    t.string   "long_description"
+    t.string   "short_description"
   end
 
   create_table "departments", force: :cascade do |t|
     t.string   "name"
-    t.integer  "created_by"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -61,7 +63,7 @@ ActiveRecord::Schema.define(version: 20170220133155) do
   create_table "rooms", force: :cascade do |t|
     t.string   "name"
     t.integer  "capacity"
-    t.integer  "created_by"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -104,9 +106,9 @@ ActiveRecord::Schema.define(version: 20170220133155) do
     t.string   "photo"
     t.string   "phone_number"
     t.string   "email_address"
-    t.string   "birthdate"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.datetime "birthdate"
   end
 
 end
