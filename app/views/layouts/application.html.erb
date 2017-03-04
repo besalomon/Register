@@ -9,6 +9,79 @@
   </head>
 
   <body>
+    
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+body {
+    font-family: "Lato", sans-serif;
+    background-color: #EAEDED;
+}
+
+
+</style>
+
+</head>
+<body>
+<div class = "header" id = "umutwe">
+<div class="container">
+  <div class="row">
+    <div class = "col-md-6" id ="headerTitle" >
+      <font color = "white"><h3>Reg</font><font color = "red">Ister</h4></font>
+    </div>
+
+    <% if current_user %>
+
+    <div class = "col-md-5" id = "headerEnd"> <br>
+      <h4><p align = "right"><font color ="white"> Hello, <%= current_user.last_name %>!</font></h4> 
+
+      <br>
+    </div>
+    <div class = "col-md-1"> <br>
+     <h4><p align = "left"><font color ="white"><%= link_to "Log Out", "/logout", method: :delete %></font></p></h4> 
+    </div>
+
+    <% else %>
+    <div class = "col-md-5" id = "headerEnd"> <br>
+       <h4><p align = "right"><%= link_to "Sign Up", "/signup" %></p></h4>
+    </div>
+
+    <div class = "col-md-1" id = "headerEnd"> <br>
+       <h4><%= link_to "Log in", "/login" %> </h4>
+     </div>
+    <% end %> 
+
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="row">
+       <div class="col-sm-2 col-sm-offset-3">
+            <div id="imaginary_container"> 
+                <div class="input-group stylish-input-group">
+                    <input type="text" class="form-control"  placeholder="Search" id ="searchButton" ></center>
+                    <span class="input-group-addon">
+                        <button type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>  
+                    </span>
+                </div>
+            </div>
+        </div>
+  </div><br>
+</div>
+
+
+</div>
+
+
+</body>
+</html>
+
     <%= yield %>
   </body>
 </html>
