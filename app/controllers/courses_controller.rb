@@ -1,12 +1,18 @@
 class CoursesController < ApplicationController
 
   def index
-    @departments = Department.all
-    @courses = Course.all
-    
-    user = User.find_by(id:session[:user_id])
-    @user = user
-    render :index
+    if params[:find]
+      @courses = Course.where("name LIKE ?", "%#{params[:find]}%" || "%#{params[:find]}%")
+    else
+      
+      @courses = Course.all
+      @departments = Department.all
+      user = User.find_by(id:session[:user_id])
+      @user = user
+      params[:find] = ""
+      render :index
+    end
+
   end
 
   def show

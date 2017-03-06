@@ -56,14 +56,15 @@ body {
 
   </div>
 </div>
-
+ 
+<%= form_tag "/courses", method: :get do %>
 <div class="container">
 
   <div class="row">
        <div class="col-sm-2 col-sm-offset-3">
             <div id="imaginary_container"> 
                 <div class="input-group stylish-input-group">
-                    <input type="text" class="form-control"  placeholder="Search" id ="searchButton" ></center>
+                    <input type="text" class="form-control"  placeholder="Search" id ="searchButton" name = "find"></center>
                     <span class="input-group-addon">
                         <button type="submit">
                             <span class="glyphicon glyphicon-search"></span>
@@ -74,7 +75,7 @@ body {
         </div>
   </div><br>
 </div>
-
+<% end %>
 
 </div>
 

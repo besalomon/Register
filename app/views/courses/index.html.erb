@@ -14,8 +14,10 @@ body {
 
 <body>
 
-<center><h2><font color="#99A3A4">Choose courses per category</font></h2></center>
 
+
+<% if params[:find] == "" %>
+<center><h2><font color="#99A3A4">Choose courses per category</font></h2></center>
 <table>
 <% @departments.each do |department|%>
 <tr>
@@ -35,12 +37,36 @@ body {
         <% end %>
     </div>
 
+</div>
   <% end %>
   <br><br>
   <% end %>
 
 </table>
 
+<% else %>
+
+<h1>Search Results</h1>
+
+<% @courses.each_slice(3) do |three_courses| %>
+    <div class="row">
+      <div class="col-md-1"> </div>
+        <% three_courses.each do |course| %>
+          <div class="col-md-4" id = "col-md-4">
+          <center><img src="<%= course.cover%>" class="img-responsive"></center><br>
+           <center><b><%= link_to course.name.upcase, "/courses/#{course.id}" %></b></font></center>
+            <center><h5><%= course.short_description %></h6></center><br>
+            <center><button type="button" class = "btn btn-<%= ["success", "info", "danger", "primary", "warning"].sample %> btn-block" id = "reg")">Register</button></center>
+          </div>
+          <div class="col-md-1"> </div> 
+        <% end %>
+    </div>
+
 </div>
+  <% end %>
+
+<% end %>
+
+</body>
 <h3><center><p>&copy; 2017 Register<p></center></h3>
 </html> 

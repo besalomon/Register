@@ -8,4 +8,10 @@ Rails.application.routes.draw do
   post "/login", to:'sessions#create'
   delete "/logout", to:'sessions#destroy'
   post "/courses", to:'courses#create'
+
+  namespace :api do
+    namespace :v1 do
+      get "/courses", to: 'courses#index'
+    end
+  end
 end
