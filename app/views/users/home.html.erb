@@ -1,0 +1,47 @@
+
+
+<% @registrations.each_slice(3) do |four_registrations| %>
+
+    <div class="row">
+      <div class="col-md-1"> </h2></div>
+      <h2> Accepted </h2>
+        <% four_registrations.each do |registration| %>
+
+          <% if registration.status_id == 2 %>
+          <div class="col-md-4" id = "col-md-4">
+          <center><img src="<%= registration.course.cover%>" class="img-responsive"></center><br>
+           <center><b><%= link_to registration.course.name.upcase, "/courses/#{registration.course.id}" %></b></font></center>
+            <center><h5><%= registration.course.short_description %></h6></center><br>
+            <center><button type="button" class = "btn btn-<%= ["success", "info", "danger", "primary", "warning"].sample %> btn-block" id = "reg")">Register</button></center>
+          </div>
+          <div class="col-md-1"> </div>
+          <% end %>
+      <% end %>
+          <div class="col-md-1"> </div> 
+    </div>
+<% end %>
+
+<div>
+
+<h2> Pending </h2>
+
+<% @registrations.each_slice(3) do |four_registrations| %>
+    <div class="row">
+      <div class="col-md-1"> </h2></div>
+      
+        <% four_registrations.each do |registration| %>
+          <% if registration.status_id == 1 %>
+          <div class="col-md-4" id = "col-md-4">
+          <center><img src="<%= registration.course.cover%>" class="img-responsive"></center><br>
+           <center><b><%= link_to registration.course.name.upcase, "/courses/#{registration.course.id}" %></b></font></center>
+            <center><h5><%= registration.course.short_description %></h6></center><br>
+            <center><button type="button" class = "btn btn-<%= ["success", "info", "danger", "primary", "warning"].sample %> btn-block" id = "reg")">Register</button></center>
+          </div>
+          <div class="col-md-1"> </div>
+          <% end %>
+      <% end %>
+          <div class="col-md-1"> </div> 
+    </div>
+<% end %>
+
+</div>

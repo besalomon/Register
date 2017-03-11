@@ -15,9 +15,14 @@ body {
 <body>
 
 
-
 <% if params[:find] == "" %>
 <center><h2><font color="#99A3A4">Choose courses per category</font></h2></center>
+<div ng-controller="AppCtrl" ng-cloak>
+<md-content>
+<md-button class="md-raised md-primary">Primary</md-button>
+</md-content>
+</div>
+
 <table>
 <% @departments.each do |department|%>
 <tr>
@@ -68,5 +73,5 @@ body {
 <% end %>
 
 </body>
-<h3><center><p>&copy; 2017 Register<p></center></h3>
+<h5><center><p>&copy; 2017 Register<p></center></h5>
 </html> 

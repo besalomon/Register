@@ -1,58 +1,99 @@
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-body {
-    font-family: "Lato", sans-serif;
-    background-color: #F2F3F4;
-}
-
-
-</style>
-
-</head>
-<body>
-<center><h2><font color="#99A3A4"><%= @course.name %></font></h2></center>
-</div>
-<br>
-<div class="container">
-  <div class="row">
-    <div class="col-md-3">
-    <img class ="cover" src = "<%= @course.cover %>" >
-    </div>
-    <div class="col-md-3">
-      <div class="verticalLine">
-      <div>
-        <h4>Course Category: <font color = "blue"><%= @department.name %> </font></h4>
-      </div>
-      <div>
-        <p align= "left"> <b>Course Description:</b> <%= @course.long_description %> </font></h4></p><br>
-      </div>
-      <div>
-        <b>Start Date: <font color = "red">TBD </font> </b>
-      </div> <br>
-      <div>
-        <b>End Date: <font color = "Green">TBD</font> </b> <br><br>
-      </div>
-      </div>
-    </div>
-    <div class="col-md-2">
-        <div class="verticalLine">
-         <center> <div>
-            Number of students in the class: #### <br><br>
-            Course Teacher: TBD<br><br><br><br>
-            <button type="button" class = "btn btn-<%= ["success", "info", "danger", "primary", "warning"].sample %> btn-block reg">Register Now!</button>
-          </div></center>
-
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <style>
+        body {
+            font-family: "Lato", sans-serif;
+            background-color: #F2F3F4;
+        }
+      </style>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+      </script>
+      <script>
+        $(document).ready(function(){
+            $("#show").click(function(){
+                $("#ele").toggle();
+            });
+        });
+      </script>
+    </head>
+    <body>
+      <div class = "row">
+        <div class ="col-md-2">
+          <h4><a href="/courses">Back to Courses</a></h4>
         </div>
-    </div>
+        <div class ="col-md-6">
+          <center><h2><font color="#99A3A4"><%= @course.name %></font></h2></center>
+        </div>
+      </div>
 
+      <br>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+          <img class ="cover" src = "<%= @course.cover %>" >
+          </div>
+          <div class="col-md-3">
+            <div class="verticalLine">
+            <div>
+              <h4>Course Category: <font color = "blue"><%= link_to @department.name, "/courses?filter = #{@department.name}"%> </font></h4>
+            </div>
+            <div>
+              <p align= "left"> <b>Course Description:</b> <%= @course.long_description %> </font></h4></p><br>
+            </div>
+            <div>
+              <b>Start Date: <font color = "red">TBD </font> </b>
+            </div> <br>
+            <div>
+              <b>End Date: <font color = "Green">TBD</font> </b> <br><br>
+            </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+              <div class="verticalLine">
+               <center> <div>
+                  Number of students in the class: #### <br><br>
+                  Course Teacher: TBD<br><br><br><br>
+                  <button type="button" class = "btn btn-<%= ["success", "info", "danger", "primary", "warning"].sample %> btn-block reg")" id = "show">
 
-  </div>
-</div>
+                  <span class="glyphicon glyphicon-plus"></span> Register Now
+                  </button>
+                </div></center>
+              </div>
+          </div>
+        </div>
+      </div>
 
-<br><br><br><br><br>
-<h5><center><p>&copy; 2017 Register<p></center></h5>
-</body>
+      
+      <div class="form-group" id = "ele">
+      <div class = "row">
+        <div class = "col-md-4"> </div>
+        <div class = "col-md-2">
+          <label for="full_name">Full Name</label>
+          <input type="text" class="form-control" id="usr" value = "<%= current_user.first_name + " " + current_user.last_name%>" disabled = "true" name = "full_name"></p>
+        </div>
+        <div class = "col-md-2">
+          <label for="full_name">Email</label>
+          <p align = "right"><input type="text" class="form-control" id="usr" value = "<%= current_user.email_address%>" disabled = "true" name = "Email"></p>
+        </div><br>
+        
+        <div class = "col-md-1">
+             <%= form_tag({:action => 'registration',:controller => 'courses'}, {:class => 'submit'}) do %>
+      <button class = "btn btn-success"> 
+        <span class="glyphicon glyphicon-ok"></span> Submit 
+      </button>
+          <% end %>
+        </div>
 
-</html> 
+        <hr>
+      </div>
+      </div>
+
+     
+
+      <br><br><br><br><br>
+      <h5><center><p>&copy; 2017 Register<p></center></h5>
+    </body>
+
+  </html> 
+

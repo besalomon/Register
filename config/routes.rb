@@ -4,11 +4,12 @@ Rails.application.routes.draw do
   post "/users", to: 'users#create'
   get "/courses/new", to:'courses#new'
   get "/courses/:id", to:'courses#show'
+  post "/courses/:id", to:'courses#registration'
   get "/login", to:'sessions#new'
   post "/login", to:'sessions#create'
   delete "/logout", to:'sessions#destroy'
   post "/courses", to:'courses#create'
-
+  get"/dashboard", to:'users#home'
   namespace :api do
     namespace :v1 do
       get "/courses", to: 'courses#index'
