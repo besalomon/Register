@@ -30,7 +30,7 @@ body {
 <div class="container">
   <div class="row">
     <div class = "col-md-6" id ="headerTitle" >
-      <font color = "white"><h3>Reg</font><font color = "red">Ister</h4></font>
+      <font color = "white"><h3>Reg</font><font color = "green">ister</h4></font>
     </div>
 
     <% if current_user %>
@@ -76,11 +76,6 @@ body {
 </div>
 <% end %>
 
-</div>
-
-
-
-
 
 </body>
 </html>
@@ -92,3 +87,62 @@ body {
     <%= yield %>
   </body>
 </html>
+
+<html id = "hmenu">
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(document).delegate('.open', 'click', function(event){
+      $(this).addClass('oppenned');
+      event.stopPropagation();
+    })
+    $(document).delegate('body', 'click', function(event) {
+      $('.open').removeClass('oppenned');
+    })
+    $(document).delegate('.cls', 'click', function(event){
+      $('.open').removeClass('oppenned');
+      event.stopPropagation();
+    });
+  });
+
+</script>
+
+<% if current_user %>
+<body class = "bmenu">
+
+<div  class="open">
+  <span class="cls" id = "mspan"></span>
+  <span id = "mspan">
+    <ul class="sub-menu " caption = "Menu">
+      <li id ="lim">
+        <a href="/dashboard" title="dashboard" id = "linkm">
+        <span class="glyphicon glyphicon-home" aria-hidden="true">
+        Dashboard
+        </span>
+        </a>
+      </li>
+      <li id ="lim">
+        <a href="/courses" title="courses" id = "linkm"><span class="glyphicon glyphicon-book" aria-hidden="true">
+        Courses
+        </span>
+        </a>
+      </li>
+      <li id ="lim">
+        <a href="/courses/rosters" title="rosters" id = "linkm"><span class="glyphicon glyphicon-list-alt" aria-hidden="true">
+        Rosters
+        </span>
+        </a>
+      </li>
+      <li id ="lim">
+        <a href="/departments" title="departments" id = "linkm"><span class="glyphicon glyphicon-flag" aria-hidden="true">
+        Settings
+        </span></a>
+      </li>
+    </ul>
+  </span>
+  <span class="cls" id = "mspan"></span>
+</div>
+
+</body>
+
+</html>
+<% end %>

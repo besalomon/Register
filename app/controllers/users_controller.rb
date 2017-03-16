@@ -36,7 +36,6 @@ class UsersController < ApplicationController
       teacher = Teacher.find_by(user_id: current_user.id)
       @registrations = TeacherCourse.where(teacher_id: teacher.id)
     end
-    end
 
   end
 

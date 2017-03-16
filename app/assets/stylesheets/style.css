@@ -256,4 +256,53 @@ input {
   border-radius:0;
 }
 
-html { overflow-y: hidden; }
+html { overflow-x: hidden; }
+
+#selectCourse {
+  width:200px;
+  height:32px;
+}
+
+
+#selectCourseCol {
+  width:200;
+}
+
+#divRoster {
+  width:700px;
+}
+
+th, td {
+    padding: 15px;
+
+}
+
+th {
+  background:#17202A;
+  color:white;
+}
+
+#rostertd {
+  border-radius:1px;
+  background: white;
+}
+
+tr{
+  border: solid thin;
+}
+/*style for the humberger */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

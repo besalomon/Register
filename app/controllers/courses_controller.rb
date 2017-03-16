@@ -80,4 +80,17 @@ class CoursesController < ApplicationController
     end
   end
 
+  def rosters
+    statuses = ["Accepted", "Pending", "Waitlisted", "Rejected"]
+    teacher = Teacher.find_by(user_id: current_user.id)
+    @registrations = TeacherCourse.where(teacher_id: teacher.id)
+    @studentcourses = StudentCourse.where(course_id: params[:course_id])
+    course_name = @studentcourses.first
+    if course_name
+    @course_name = course_name.course.name
+    @arr = []
+    @statuses = statuses - []
+    end
+  end
+
 end
