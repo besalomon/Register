@@ -20,11 +20,23 @@ class UsersController < ApplicationController
     if user.save
       session[:user_id] = user.id
       flash[:success] = "Successfully Created Account"
-      redirect_to '/courses'
+      redirect_to '/dashboard'
     else
       flash[:warning] = "Invalid Password or Email"
       redirect_to '/signup'
     end
+  end
+
+  def home
+    if current_user.role.name == "student"
+    student = Student.find_by(user_id: current_user.id)
+    @registrations = StudentCourse.where(student_id: student.id)
+
+    elsif current_user.role.name == "teacher"
+      teacher = Teacher.find_by(user_id: current_user.id)
+      @registrations = TeacherCourse.where(teacher_id: teacher.id)
+    end
+
   end
 
 end

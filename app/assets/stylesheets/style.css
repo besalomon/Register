@@ -234,7 +234,7 @@ input {
 }
 
 #umutwe {
-  height:170px;
+  height:150px;
 }
 
 #searchButton {
@@ -242,5 +242,67 @@ input {
 }
 
 #headerTitle {
-  width:580px;
+  width:680px;
 }
+
+#ele {
+  display: none;
+}
+
+#menu {
+  background:#17202A;
+  float: right;
+  box-shadow:0 4px 10px 4px;
+  border-radius:0;
+}
+
+html { overflow-x: hidden; }
+
+#selectCourse {
+  width:200px;
+  height:32px;
+}
+
+
+#selectCourseCol {
+  width:200;
+}
+
+#divRoster {
+  width:700px;
+}
+
+th, td {
+    padding: 15px;
+
+}
+
+th {
+  background:#17202A;
+  color:white;
+}
+
+#rostertd {
+  border-radius:1px;
+  background: white;
+}
+
+tr{
+  border: solid thin;
+}
+/*style for the humberger */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

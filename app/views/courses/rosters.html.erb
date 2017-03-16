@@ -1,0 +1,50 @@
+ <style>
+  table { border-collapse: collapse; }
+  tr:nth-child(3) { border: solid thin; }
+ </style>
+
+<div class="form-group">
+    <br>
+    <center>
+    <%= form_tag"/courses/rosters?course=#{params[:course_id]}", method: :get do%>
+     <select class="selectpicker" id ="selectCourse" name = "course_id">
+      <option disabled selected>
+      Select a Course
+      </option>
+      <%= @registrations.each do |registration|%>
+        <option value="<%= registration.course.id %>" id = "crs" name = "d_id"><%= registration.course.name %></option>
+      <% end %>
+    </select>
+    <button class = "btn btn-success" id = "select_button">submit</button>
+
+    <% end %>
+</div>
+
+<h3>Roster for <b>"<%= @course_name %>"</b></h3>
+
+<table id = "rosterShow" border = "1">
+  <tr>
+    <th>Student Names</th>
+    <th>Student Email</th>
+    <th>Status</th>
+  </tr></h3>
+  <% @studentcourses.each do |studentcourse|%>
+    <tr>
+      <td id = "rostertd" ><%= studentcourse.student.user.first_name + " " + studentcourse.student.user.last_name %></td>
+      <td id = "rostertd"> <%= studentcourse.student.user.email_address %></td>
+      <td id = "rostertd"> 
+      <select class = "select" id = "select_status">
+      <option>
+      <button class = "btn btn-success"><%= studentcourse.status.name%> </button>
+      </option>
+      <% @arr << studentcourse.status.name%>
+      <% statuses = @statuses - @arr %>
+      <% statuses.each do |status|%>
+        <option name = "<% studentcourse.course.name %>"><%= status %></option>
+      <% end %>
+      </select>
+      </td>
+    </tr>
+  <% end %>
+</table> <br>
+<button>Update</button>

@@ -4,12 +4,12 @@ class CoursesController < ApplicationController
     if params[:find]
       @courses = Course.where("name LIKE ?", "%#{params[:find]}%" || "%#{params[:find]}%")
     else
-      
+      params[:find] = ""
       @courses = Course.all
       @departments = Department.all
       user = User.find_by(id:session[:user_id])
       @user = user
-      params[:find] = ""
+      
       render :index
     end
 
@@ -51,6 +51,46 @@ class CoursesController < ApplicationController
     flash[:warning] = "Make sure all the fields are not empty"
   end
 
+  end
+
+  def registration
+    course = Course.find_by(id: params[:id])
+    if current_user.role.name == "student"
+      student = Student.find_by(user_id: current_user.id)
+      student_number = student.id
+      @registration = StudentCourse.new(
+        student_id: student_number,
+        course_id: course.id,
+        status: "Pending"
+        )
+      if @registration.save
+        flash[:success] = "Registration Successful"
+        redirect_to"/courses"
+      end
+    elsif current_user.role.name == "teacher"
+      teacher = Teacher.find_by(user_id: current_user.id)
+      teacher_id = teacher.id
+      @registration = TeacherCourse.new(
+        teacher_id: teacher.id,
+        course_id: course.id,
+        )
+      if @registration.save
+        flash[:success] = "Registration Successful"
+      end
+    end
+  end
+
+  def rosters
+    statuses = ["Accepted", "Pending", "Waitlisted", "Rejected"]
+    teacher = Teacher.find_by(user_id: current_user.id)
+    @registrations = TeacherCourse.where(teacher_id: teacher.id)
+    @studentcourses = StudentCourse.where(course_id: params[:course_id])
+    course_name = @studentcourses.first
+    if course_name
+    @course_name = course_name.course.name
+    @arr = []
+    @statuses = statuses - []
+    end
   end
 
 end
