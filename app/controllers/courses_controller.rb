@@ -111,14 +111,14 @@ class CoursesController < ApplicationController
 
   def update_roster
     @studentroster = StudentCourse.where(course_id: params[:course_id])
-    status_hash = params[:statuses]
-    @studentroster.each do |roster|
-      index = 0
-      roster.update(
-        status_id: status_hash[index]
+    status_hash = params[:reg_info]
+    status_hash.each do |hash|
+      record = StudentCourse.find_by(id:hash[:id])
+      record.update(
+        status_id: hash[:status]
         )
-      index += 1
     end
+
   end
 
 end

@@ -38,7 +38,7 @@
           <button class = "btn btn-success" disabled><%= studentcourse.status.name%> </button>
       </td>
       <td>
-      <select name = "statuses[]" id ="current_status">
+      <select name = "reg_info[]status" id ="current_status">
         <% @stat.each do |status| %>
             <option value = "<%= status.id %>">
               <%= status.name %>
@@ -49,6 +49,8 @@
       </td>
     </tr>
     <input type="hidden" name="course_id" value = "<%= studentcourse.course_id%>">
+    <input type="hidden" name="reg_info[]id" value = "<%= studentcourse.id%>">
+
     <% end %>
   </table> <br>
   <% select_tag "studentcourse", options_from_collection_for_select(@studentcourses, :status_id, :student_id) %>
