@@ -61,7 +61,7 @@ class CoursesController < ApplicationController
       @registration = StudentCourse.new(
         student_id: student_number,
         course_id: course.id,
-        status: "Pending"
+        status_id: 1
         )
       if @registration.save
         flash[:success] = "Registration Successful"
@@ -81,15 +81,43 @@ class CoursesController < ApplicationController
   end
 
   def rosters
-    statuses = ["Accepted", "Pending", "Waitlisted", "Rejected"]
-    teacher = Teacher.find_by(user_id: current_user.id)
-    @registrations = TeacherCourse.where(teacher_id: teacher.id)
-    @studentcourses = StudentCourse.where(course_id: params[:course_id])
-    course_name = @studentcourses.first
-    if course_name
-    @course_name = course_name.course.name
-    @arr = []
-    @statuses = statuses - []
+    @statuses = []
+    @stat = Status.all
+    statuses = Status.all
+    statuses.each do |status|
+      @statuses << status.name
+    end
+    if current_user.role.name == "admin"
+      @registrations = TeacherCourse.all
+      @studentcourses = StudentCourse.where(course_id: params[:course_id])
+      course_name = @studentcourses.first
+      if course_name
+        @course_name = course_name.course.name
+        @arr = []
+        @var = params[:id]
+      end
+    else
+      teacher = Teacher.find_by(user_id: current_user.id)
+      @registrations = TeacherCourse.where(teacher_id: teacher.id)
+      @studentcourses = StudentCourse.where(course_id: params[:course_id])
+      course_name = @studentcourses.first
+      if course_name
+        @course_name = course_name.course.name
+        @arr = []
+        @var = params[:id]
+      end
+    end
+  end
+
+  def update_roster
+    @studentroster = StudentCourse.where(course_id: params[:course_id])
+    status_hash = params[:statuses]
+    @studentroster.each do |roster|
+      index = 0
+      roster.update(
+        status_id: status_hash[index]
+        )
+      index += 1
     end
   end
 

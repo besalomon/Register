@@ -1,6 +1,11 @@
-<center><h1> Create an Account </h1></center>
+<html>
+<title></title>
+<head>
+<script src="myjs.js"></script>
+</head>
+<h1> Create an Account </h1>
 
-<div class="col-md-3">
+<div class="col-md-2">
 
 </div>
 
@@ -53,13 +58,44 @@
     <input type="text" class="form-control" id="ImageURL" aria-describedby="PhoneNumber" placeholder="Enter the image url" name = "photo">
   </div>
 
+  <% if current_user && current_user.role.name == "admin" %>
+
+  <div class="form-group">
+    <label for="ImageURL">Role</label>
+    <select class="form-control" name = "role_id" onchange="showDiv(this)">
+      <% @roles.each do |role| %>
+      <option value="<%= role.id %>"><%= role.name %></option>
+      <% end %>
+    </select>
+  </div>
+  <% end %>
+
+      <div id = "hidden_div" hidden>
+        <div class="form-group">
+          <label for="title">Job Title</label>
+          <input type="text" class="form-control" id="Title" aria-describedby="JobTitle" placeholder="Enter your job title" name = "job_title">
+        </div>
+      </div>  
+
+      <div id = "hidden_di" hidden>
+        <div class="form-group">
+          <label for="title">Class Level</label>
+          <select class="form-control">
+          <option>Level 1</option>
+          <option>Level 2</option>
+          <option>Level 3</option>
+          <option>Level 4</option>
+          </select>
+        </div>
+      </div>  
+
   </fieldset>
   <button type="submit" class="btn btn-primary">Sign Up</button>
 </form>
 
 </div>
 <% end %>
-<div class = "col-md-3">
   
 
 </div>
+</html>

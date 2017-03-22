@@ -1,14 +1,14 @@
 class UsersController < ApplicationController
   def new
+    @roles = Role.all
     render :new
   end
 
   def create
-    var = 4
     user = User.new(
       first_name: params[:first_name],
       last_name: params[:last_name],
-      role_id: var,
+      role_id: params[:role_id],
       email_address: params[:email],
       password: params[:password],
       password_confirmation: params[:password_confirmation],
@@ -18,6 +18,17 @@ class UsersController < ApplicationController
       bio: params[:bio]
       )
     if user.save
+      if user.role_id == "teacher"
+        Student.create(
+          user_id: user.id,
+          class_level: params[:class_level]
+          )
+      elsif user.role == "student"
+        Teacher.create(
+          user_id: user.id,
+          title: params[:job_title]
+          )
+      end
       session[:user_id] = user.id
       flash[:success] = "Successfully Created Account"
       redirect_to '/dashboard'
@@ -37,6 +48,10 @@ class UsersController < ApplicationController
       @registrations = TeacherCourse.where(teacher_id: teacher.id)
     end
 
+  end
+
+  def settings
+    
   end
 
 end

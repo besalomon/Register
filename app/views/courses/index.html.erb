@@ -33,7 +33,7 @@ body {
       <div class="col-md-1"> </div>
         <% three_courses.each do |course| %>
           <div class="col-md-4" id = "col-md-4">
-          <center><img src="<%= course.cover%>" class="img-responsive"></center><br>
+          <center><img src="<%= course.cover%>" class="img-responsive" id = "img"></center><br>
            <center><b><%= link_to course.name.upcase, "/courses/#{course.id}" %></b></font></center>
             <center><h5><%= course.short_description %></h6></center><br>
             <center><button type="button" class = "btn btn-<%= ["success", "info", "danger", "primary", "warning"].sample %> btn-block" id = "reg")">Register</button></center>
@@ -58,7 +58,7 @@ body {
       <div class="col-md-1"> </div>
         <% three_courses.each do |course| %>
           <div class="col-md-4" id = "col-md-4">
-          <center><img src="<%= course.cover%>" class="img-responsive"></center><br>
+          <center><img src="<%= course.cover%>" class="img-responsive" id = "img"></center><br>
            <center><b><%= link_to course.name.upcase, "/courses/#{course.id}" %></b></font></center>
             <center><h5><%= course.short_description %></h6></center><br>
             <center><button type="button" class = "btn btn-<%= ["success", "info", "danger", "primary", "warning"].sample %> btn-block" id = "reg")">Register</button></center>
