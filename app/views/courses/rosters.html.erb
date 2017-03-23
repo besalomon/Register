@@ -39,6 +39,9 @@
       </td>
       <td>
       <select name = "reg_info[]status" id ="current_status">
+        <option disabled="" selected="">
+          Select
+        </option>
         <% @stat.each do |status| %>
             <option value = "<%= status.id %>">
               <%= status.name %>

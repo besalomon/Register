@@ -19,6 +19,8 @@ class CoursesController < ApplicationController
     @course = Course.find_by(id:params[:id])
     coursedep = CourseDepartment.find_by(course_id:@course.id)
     @department = Department.find_by(id:coursedep.department_id)
+    course = StudentCourse.where("status_id=? AND course_id =?", 2, params[:id])
+    @number = course.length
     render :show
   end
 
@@ -57,25 +59,39 @@ class CoursesController < ApplicationController
     course = Course.find_by(id: params[:id])
     if current_user.role.name == "student"
       student = Student.find_by(user_id: current_user.id)
+      check_roster = StudentCourse.where("user_id =? AND course_id =?", current_user.id, params[:id])
       student_number = student.id
-      @registration = StudentCourse.new(
-        student_id: student_number,
-        course_id: course.id,
-        status_id: 1
-        )
-      if @registration.save
-        flash[:success] = "Registration Successful"
-        redirect_to"/courses"
+      if check_roster
+        flash[:warning] = "You are already enrolled in that course"
+        redirect_to "/courses"
+      else
+        @registration = StudentCourse.new(
+          student_id: student_number,
+          course_id: course.id,
+          status_id: 1
+          )
+        if @registration.save
+          flash[:success] = "Registration Successful"
+          redirect_to"/courses"
+        end
       end
     elsif current_user.role.name == "teacher"
+
       teacher = Teacher.find_by(user_id: current_user.id)
       teacher_id = teacher.id
-      @registration = TeacherCourse.new(
-        teacher_id: teacher.id,
-        course_id: course.id,
-        )
-      if @registration.save
-        flash[:success] = "Registration Successful"
+      check_roster = StudentCourse.where("user_id =? AND course_id =?", current_user.id, params[:id])
+      if check_roster
+        flash[:warning] = "You are already registered in that course"
+        redirect_to "/courses"
+      else
+
+        @registration = TeacherCourse.new(
+          teacher_id: teacher.id,
+          course_id: course.id,
+          )
+        if @registration.save
+          flash[:success] = "Registration Successful"
+        end
       end
     end
   end
@@ -118,7 +134,7 @@ class CoursesController < ApplicationController
         status_id: hash[:status]
         )
     end
-
+    redirect_to :back
   end
 
 end

@@ -6,12 +6,25 @@
     <div class="row">
       <div class="col-md-1"> </h2></div>
         <% four_registrations.each do |registration| %>
+        <% if current_user.role.name == "student" %>
+        <% if registration.status.name != "Rejected"%>
           <div class="col-md-4" id = "col-md-4">
           <center><img src="<%= registration.course.cover%>" class="img-responsive" id = "img"></center><br>
            <center><b><%= link_to registration.course.name.upcase, "/courses/#{registration.course.id}" %></b></font></center>
             <center><h5><%= registration.course.short_description %></h6></center><br>
-            <center><button type="button" class = "btn btn-<%= ["success", "info", "danger", "primary", "warning"].sample %> btn-block" id = "reg")">Register</button></center>
+            
+            <center><button disabled type="button" class = "btn btn-<%= ["success", "info", "danger", "primary", "warning"].sample %> btn-block" id = "reg")">Status: <%= registration.status.name%></button></center>
           </div>
+            <% end %>
+            <% elsif current_user.role.name = "teacher"%>
+              <div class="col-md-4" id = "col-md-4">
+          <center><img src="<%= registration.course.cover%>" class="img-responsive" id = "img"></center><br>
+           <center><b><%= link_to registration.course.name.upcase, "/courses/#{registration.course.id}" %></b></font></center>
+            <center><h5><%= registration.course.short_description %></h6></center><br>
+            
+            <center><a href = "/courses/<%= registration.course_id%>"><button type="button" class = "btn btn-<%= ["success", "info", "danger", "primary", "warning"].sample %> btn-block" id = "reg")">More Info</button></a></center>
+          </div>
+            <% end %>
           <div class="col-md-1"> </div>
       <% end %>
           <div class="col-md-1"> </div> 

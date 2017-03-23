@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>New Room</title>
+</head>
+<body>
+<h1>New Room</h1>
+<%= form_tag"/rooms", :class => "room", method: :post do %>
+  <div class="form-group">
+    <label for="room_name">Room Name</label>
+    <input type="text" class="form-control" id="Name" aria-describedby="Room Name" placeholder="Enter the Room Name" name ="room_name">
+    <small id="FirstNameHelp" class="form-text text-muted" >Eg: Musanze Lounge</small>
+  </div>
+
+    <div class="form-group">
+    <label for="capacity">Capacity</label>
+    <input type="number" class="form-control" id="numberofstudents" aria-describedby="Number of Students" name = "capacity" >
+    <small id="UserNameHelp" class="form-text text-muted" >Note: How many students can the room accomodate?</small>
+  </div>
+
+  <div class="form-group">
+    <label for="last_name">Created_by</label>
+    <input type="text" class="form-control" id="LastName" aria-describedby="Created by" value = "<%= current_user.last_name + " " + current_user.first_name%>" disabled>
+    <small id="UserNameHelp" class="form-text text-muted" >Note: Make sure you are logged in with the right user info</small>
+  </div>
+
+<button type="submit" class="btn btn-primary">Create room</button>
+  <% end %>
+</body>
+</html>

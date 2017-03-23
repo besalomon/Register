@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>New Department</title>
+</head>
+<body>
+<h1>New Department</h1>
+<%= form_tag"/departments", :class => "department", method: :post do %>
+  <div class="form-group">
+    <label for="first_name">Deparmtent Name</label>
+    <input type="text" class="form-control" id="FirstName" aria-describedby="FirstName" placeholder="Enter the Deparmtent Name" name ="department_name">
+    <small id="FirstNameHelp" class="form-text text-muted" >Eg: Technology</small>
+  </div>
+  <div class="form-group">
+    <label for="last_name">Created_by</label>
+    <input type="text" class="form-control" id="LastName" aria-describedby="Created by" value = "<%= current_user.last_name + " " + current_user.first_name%>" disabled>
+    <small id="UserNameHelp" class="form-text text-muted" >Note: Make sure you are logged in with the right user info</small>
+  </div>
+<button type="submit" class="btn btn-primary">Create Department</button>
+  <% end %>
+</body>
+</html>

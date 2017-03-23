@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   get "students", to:'students#index'
   patch "rosters", to:'student_courses#update'
   get "settings", to:'users#settings'
+  resources :departments
+  resources :rooms
+
   namespace :api do
     namespace :v1 do
       get "/courses", to: 'courses#index'

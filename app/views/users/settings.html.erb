@@ -4,28 +4,36 @@
   <title></title>
 </head>
 <body>
-<br>
+<h1>Settings</h1>
+<br> <br> <br>
 <div class = "row" id = "set">
   <div class = "col-md-1" id = "spacer">
   </div>
   <center><div class = "col-md-2">
-    <img src="http://icons.iconarchive.com/icons/iconsmind/outline/512/Add-User-icon.png" id = "nuser"><br>
+    <%= image_tag ("add-user.png"), :class => "tag" %><br>
       <a href ="/signup">New User</a>
       <hr class = "devide">
-      Set up a new user(student, admin, teacher)
+      <p class = "sec1"> <font color = "white">
+        Set up a new user(student, admin, teacher)
+      </font></p>
   </div> 
     <center><div class = "col-md-2">
     <%= image_tag ("department.png"), :class => "tag" %><br>
-      <a href ="/signup">New Department</a>
+      <a href ="/departments/new">New Department</a>
       <hr class = "devide">
+      <p class = "sec"> <font color = "white">
       Set up a new department from which courses come from
+      </font></p>
     </div>
 
     <center><div class = "col-md-2">
     <%= image_tag ("room.png"), :class => "tag" %><br>
-      <a href ="/signup">New Room</a>
+      <a href ="/rooms/new">New Room</a>
       <hr class = "devide">
-      Set up a new classroom from which courses take place
+      <p class = "sec2"> <font color = "white">
+        Set up a new classroom from which courses take place
+        </font>
+      </p>
     </div>
 
 </div>

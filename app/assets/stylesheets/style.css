@@ -317,8 +317,31 @@ th {
   width:90px;
 }
 
+.sec {
+  background: #17202A;
+}
 
+.sec1 {
+  background: #5DADE2;
+  height:40px;
+}
 
+.sec2 {
+  background: #28B463;
+}
 
+.department {
+  border-radius: 5px;
+  font: 14px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: #95A5A6;
+  overflow: hidden;
+  width: 450px;
+}
 
-
+.room {
+  border-radius: 5px;
+  font: 14px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: #95A5A6;
+  overflow: hidden;
+  width: 450px;
+}
