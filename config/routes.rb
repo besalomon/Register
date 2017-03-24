@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get "students", to:'students#index'
   patch "rosters", to:'student_courses#update'
   get "settings", to:'users#settings'
+  get "profile", to:'users#profile'
   resources :departments
   resources :rooms
 

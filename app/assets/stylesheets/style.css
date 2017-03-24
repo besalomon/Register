@@ -345,3 +345,22 @@ th {
   overflow: hidden;
   width: 450px;
 }
+
+#p_image {
+  width:320px;
+}
+
+#p_description{
+  border-radius: 5px;
+  font: 14px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: blue;
+  overflow: hidden;
+  height: 400px;
+  width:600px;
+  top: -41px;
+}
+
+#p_name {
+  background:#17202A;
+  height:40px;
+}

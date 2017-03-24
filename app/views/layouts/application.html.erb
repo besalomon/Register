@@ -37,7 +37,7 @@ body {
 
     <div class = "col-md-5" id = "headerEnd"> <br>
       <ul class="nav nav-pills" role="tablist" id= "menu">
-        <li role="presentation"><a href="/dashboard"> Hello, <%= current_user.last_name %>!</a></li>
+        <li role="presentation"><a href="/profile"> Hello, <%= current_user.last_name %>!</a></li>
         <li role="presentation"><a href="#">Notifications <span class="badge">3</span></a></li>
         <li role="presentation"><%= link_to "Log Out", "/logout", method: :delete %></li>
       </ul>
