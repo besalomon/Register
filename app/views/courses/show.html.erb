@@ -25,6 +25,12 @@
         <div class ="col-md-6">
           <center><h2><font color="#99A3A4"><%= @course.name %></font></h2></center>
         </div>
+
+        <div class = "col-md-1" id = "edit_course">
+        <span class="glyphicon glyphicon-pencil" aria-hidden="true"><a href= "<%= params[:id]%>/edit"><h5>Edit Course</h5></a>
+        </span>
+          
+        </div>
       </div>
 
       <br>
@@ -87,8 +93,6 @@
         <hr>
       </div>
       </div>
-
-     
 
       <br><br><br><br><br>
       <h5><center><p>&copy; 2017 Register<p></center></h5>

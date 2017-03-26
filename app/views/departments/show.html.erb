@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>View Department</title>
+</head>
+<body>
+<h1>View/Update Department</h1>
+<%= form_tag"/departments/#{params[:id]}", :class => "department", method: :pat do %>
+  <div class="form-group">
+    <label for="first_name">Deparmtent Name</label>
+    <input type="text" class="form-control" id="FirstName" aria-describedby="FirstName" value = "<%= @department.name %>" name ="department_name">
+    <small id="FirstNameHelp" class="form-text text-muted" >Eg: Technology</small>
+  </div>
+  <div class="form-group">
+    <label for="last_name">Created_by</label>
+    <input type="text" class="form-control" id="LastName" aria-describedby="Created by" value = "<%= @department.user.last_name + " " + @department.user.first_name%>" disabled>
+    <small id="UserNameHelp" class="form-text text-muted" >Note: Make sure you are logged in with the right user info</small>
+  </div>
+<button type="submit" class="btn btn-primary">Update Department</button>
+  <% end %>
+</body>
+</html>

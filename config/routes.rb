@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   patch "courses/rosters", to:'courses#update_roster'
   get "/courses/:id", to:'courses#show'
   post "/courses/:id", to:'courses#registration'
+  get "/courses/:id/edit", to: 'courses#edit'
+  patch "/courses/:id", to: 'courses#update'
+  patch "/courses/:id", to: 'courses#destroy'
   get "/login", to:'sessions#new'
   post "/login", to:'sessions#create'
   delete "/logout", to:'sessions#destroy'
@@ -19,7 +22,6 @@ Rails.application.routes.draw do
   get "profile", to:'users#profile'
   resources :departments
   resources :rooms
-
   namespace :api do
     namespace :v1 do
       get "/courses", to: 'courses#index'

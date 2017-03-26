@@ -1,0 +1,107 @@
+
+<legend><h1>Edit Course!</h1></legend>
+<hr>
+
+
+<div class = "hagati">
+<div class="container">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-6">
+      <%= form_tag "/courses/#{params[:id]}", :class => "form-horizontal", method: :patch do %>
+        <div class="form-group">
+          <label for="inputcourseName" class="col-sm-2 control-label" + class= >Course Name:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputcourseName" value = "<%= @course.name %>" name = "long_name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputshortname" class="col-sm-2 control-label">Short Name:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputShortName"  value = "<%= @course.short_name %>"  name = "short_name">
+          </div>
+        </div>
+        
+      <div class="form-group">
+        <label for="description" class="col-sm-2 control-label">Long Description:</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" rows="5" id="comment"   name = "long_description"> <%= @course.long_description %> </textarea>
+          </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="description" class="col-sm-2 control-label">Short Description:</label>
+          <div class="col-sm-10">
+            <input type = "text" class="form-control" name ="short_description" id = "shortDescription" value = "<%= @course.short_description %>">
+          </div>
+      </div>
+
+
+      <div class="form-group">
+          <label for="category" class="col-sm-2 control-label">Category:</label>
+          <div class="col-sm-10">
+            <select class="selectpicker" id ="category" name = "department_id">
+            <option selected disabled>
+                Current: <%= @course.departments.first.name%>
+              </option>
+            <%= @categories.each do |category|%>
+               <option value="<%= category.id %>"><%= category.name %></option>
+            <% end %>
+            </select>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="coverUrl" class="col-sm-2 control-label">Cover URL:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputCoverUrl" value = "<%= @course.cover %>" name ="cover">
+          </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="example-number-input" class="col-sm-2 control-label">Max Number of Students: </label>
+        <div class="col-sm-10">
+          <input class="form-control" type="number" value = "<%= @course.max_number %>" id="inputNumber" name ="max_number">
+        </div>
+      </div>
+
+      <div class="form-group">
+          <label for="category" class="col-sm-2 control-label">Min Number of Students:</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="number" value = "<%= @course.min_number %>" id="inputNumber" name = "min_number">
+          </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="category" class="col-sm-2 control-label">Start Date:</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="date"  id="courseStartDate" name = "start_date">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="category" class="col-sm-2 control-label">Start Date:</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="date" id="courseEndDate" name = "end_date">
+        </div>
+      </div>
+      <hr>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Edit Course</button>
+          </div>
+        </div>
+        &nbsp
+        <div>
+        </div>
+      </form>
+
+    </div>
+    <% end %>
+  </div>
+</div>
+</div>
+

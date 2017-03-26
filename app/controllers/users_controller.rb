@@ -5,11 +5,16 @@ class UsersController < ApplicationController
   end
 
   def create
+      if current_user && current_user.role.name == "admin"
+       user_role = params[:role_id]
+      else
+       user_role = 3
+      end
     user = User.new(
       first_name: params[:first_name],
       last_name: params[:last_name],
-      role_id: params[:role_id],
       email_address: params[:email],
+      role_id: user_role,
       password: params[:password],
       password_confirmation: params[:password_confirmation],
       photo: params[:photo],
@@ -18,12 +23,12 @@ class UsersController < ApplicationController
       bio: params[:bio]
       )
     if user.save
-      if user.role_id == "teacher"
+      if user.role.name == "student"
         Student.create(
           user_id: user.id,
           class_level: params[:class_level]
           )
-      elsif user.role == "student"
+      elsif user.role.name == "teacher"
         Teacher.create(
           user_id: user.id,
           title: params[:job_title]

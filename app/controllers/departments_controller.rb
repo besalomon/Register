@@ -13,4 +13,30 @@ class DepartmentsController < ApplicationController
       redirect_to "/courses"
     end
   end
+
+  def index
+    @departments = Department.all
+  end
+
+  def show
+    @department = Department.find_by(id:params[:id])
+  end
+
+  def update
+    @room = Department.find_by(id: params[:id])
+    @room.update(
+      name: params[:department_name]
+      )
+    redirect_to "/departments"
+  end
+
+  def destroy
+    department = Department.find_by(id:params[:id])
+    department.delete
+    course_dep = CourseDepartment.find_by(department_id: department.id)
+    if course_dep
+      course_dep.delete
+    end
+    redirect_to "/departments"
+  end
 end

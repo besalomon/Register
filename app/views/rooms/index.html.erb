@@ -1,0 +1,16 @@
+<h1>Rooms</h1>
+
+<table id = "rosterShow" border = "1">
+    <tr>
+      <th>Room Name</th>
+      <th>Capacity</th>
+      <th>Created By</th>
+    </tr></h3>
+    <% @rooms.each do |room|%>
+    <tr>
+      <td id = "rostertd" ><a href = "rooms/<%= room.id %>"><%= room.name %></td>
+      <td id = "rostertd"> <%= room.capacity %></td>
+      <td id = "rostertd"> <%= room.user.first_name + " " + room.user.last_name %></td>
+    </tr>
+    <% end %>
+  </table> <br>

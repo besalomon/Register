@@ -12,7 +12,7 @@
         Select a Course
       </option>
       <%= @registrations.each do |registration|%>
-      <option value="<%= registration.course.id %>" id = "crs" name = "d_id"><%= registration.course.name %></option>
+      <option value="<%= registration.course.id || registration.id %>" id = "crs" name = "d_id"><%= registration.course.name || registration.name %></option>
       <% end %>
     </select>
     <button class = "btn btn-success" id = "select_button">submit</button>
