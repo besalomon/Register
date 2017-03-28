@@ -38,7 +38,7 @@ body {
     <div class = "col-md-5" id = "headerEnd"> <br>
       <ul class="nav nav-pills" role="tablist" id= "menu">
         <li role="presentation"><a href="/profile"> Hello, <%= current_user.last_name %>!</a></li>
-        <li role="presentation"><a href="#">Notifications <span class="badge">3</span></a></li>
+        <li role="presentation"><a href="/dashboard">Dashboard</a></li>
         <li role="presentation"><%= link_to "Log Out", "/logout", method: :delete %></li>
       </ul>
     </div>
@@ -113,11 +113,24 @@ body {
   <span id = "mspan">
     <ul class="sub-menu " caption = "Menu">
       <li id ="lim">
+      <% if current_user.role.name == "admin" %>
+        <a href="/settings" title="dashboard" id = "linkm">
+        <% else %>
         <a href="/dashboard" title="dashboard" id = "linkm">
+        <% end %>
         <span class="glyphicon glyphicon-home" aria-hidden="true">
         Dashboard
         </span>
         </a>
+
+        <% if current_user.role.name == "student"%>
+        <li id ="lim">
+        <a href="/profile" title="departments" id = "linkm"><span class="glyphicon glyphicon-user" aria-hidden="true">
+        Profile
+        </span></a>
+      </li>
+      <% end %>
+        
       </li>
       <li id ="lim">
         <a href="/courses" title="courses" id = "linkm"><span class="glyphicon glyphicon-book" aria-hidden="true">
@@ -125,6 +138,7 @@ body {
         </span>
         </a>
       </li>
+      <% if current_user.role.name == "admin" || current_user.role.name == "teacher"%>
       <li id ="lim">
         <a href="/courses/rosters" title="rosters" id = "linkm"><span class="glyphicon glyphicon-list-alt" aria-hidden="true">
         Rosters
@@ -136,6 +150,8 @@ body {
         Settings
         </span></a>
       </li>
+      <% end %>
+
     </ul>
   </span>
   <span class="cls" id = "mspan"></span>

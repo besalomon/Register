@@ -1,10 +1,16 @@
 class CoursesController < ApplicationController
+ #before_action :authenticate_teacher!, except: [:index]
 
   def index
     if params[:find]
       @courses = Course.where("name LIKE ?", "%#{params[:find]}%" || "%#{params[:find]}%")
+    elsif params[:filter]
+      department = params[:filter]
+      dep = Department.find_by(name: department)
+      @courses = dep.courses
     else
       params[:find] = ""
+      params[:filter] = ""
       @courses = Course.all
       @departments = Department.all
       user = User.find_by(id:session[:user_id])
@@ -211,6 +217,37 @@ class CoursesController < ApplicationController
       end
     end
   redirect_to :back
+  end
+
+  def cancel_registration
+    @course = Course.find_by(id:params[:id])
+    coursedep = CourseDepartment.find_by(course_id:@course.id)
+    @department = Department.find_by(id:coursedep.department_id)
+    course = StudentCourse.where("status_id=? AND course_id =?", 2, params[:id])
+    @number = course.length
+    if current_user.role.name == "student"
+      @record = StudentCourse.find_by("student_id =? AND course_id =?", current_user.student.id, params[:id])
+      if @record
+        if @record.status_id == 1
+          @record.delete
+          flash[:success] = "You were successfully removed from the course #{@record.course.name}"
+          redirect_to "/dashboard"
+        else
+          flash[:warning] = "You can't cancel registration, since the teacher has already evaluated your record"
+        end
+      end
+    elsif current_user.role.name
+      @record = TeacherCourse.find_by("teacher_id =? AND course_id =?", current_user.teacher.id, params[:id])
+      if @record
+        @record.delete
+        flash[:success] = "You were successfully removed from the course #{@record.course.name}"
+        redirect_to "/dashboard"
+      end
+    end
+  end
+
+  def show_department
+    @department = Department.find_by(id: params[:id])
   end
 
 end

@@ -26,7 +26,7 @@ body {
 <table>
 <% @departments.each do |department|%>
 <tr>
-<h2><font color = "#566573"><%= link_to department.name, "/courses?filter = #{department.name}"%></font></h2>
+<h2><font color = "#566573"><%= link_to department.name, "/courses/departments/#{department.id}"%></font></h2>
 </tr>
 <% department.courses.each_slice(3) do |three_courses| %>
     <div class="row">
@@ -49,7 +49,7 @@ body {
 
 </table>
 
-<% else %>
+<% elsif params[:find] %>
 
 <h1>Search Results</h1>
 

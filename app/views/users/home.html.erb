@@ -1,13 +1,24 @@
 <div id = "dashboardSM">
-<h1> My Courses</h1>
+<div class = "row">
+  <div class = "col-md-9"> 
+    <h1> My Courses</h1>
+  </div>
+
+  <div class = "col-md-2"><br>
+      <div class="btn-group" role="group" aria-label="..."> 
+  <button type="button" class="btn btn-default"><a href = "/dashboard?sort=status">Sort by Status</a></button>
+  <button type="button" class="btn btn-default"><a href = "/dashboard">Reset</a></button>
+</div>
+
+  </div>
+  
+</div>
 </div>
 <% @registrations.each_slice(3) do |four_registrations| %>
-
     <div class="row">
-      <div class="col-md-1"> </h2></div>
+      <div class="col-md-1"> </div>
         <% four_registrations.each do |registration| %>
         <% if current_user.role.name == "student" %>
-        <% if registration.status.name != "Rejected"%>
           <div class="col-md-4" id = "col-md-4">
           <center><img src="<%= registration.course.cover%>" class="img-responsive" id = "img"></center><br>
            <center><b><%= link_to registration.course.name.upcase, "/courses/#{registration.course.id}" %></b></font></center>
@@ -15,7 +26,6 @@
             
             <center><button disabled type="button" class = "btn btn-<%= ["success", "info", "danger", "primary", "warning"].sample %> btn-block" id = "reg")">Status: <%= registration.status.name%></button></center>
           </div>
-            <% end %>
             <% elsif current_user.role.name = "teacher"%>
               <div class="col-md-4" id = "col-md-4">
           <center><img src="<%= registration.course.cover%>" class="img-responsive" id = "img"></center><br>

@@ -46,11 +46,15 @@ class UsersController < ApplicationController
   def home
     if current_user.role.name == "student"
     student = Student.find_by(user_id: current_user.id)
-    @registrations = StudentCourse.where(student_id: student.id)
+    @registrations = StudentCourse.where("student_id =? AND status_id !=?", current_user.student.id, 3)
 
     elsif current_user.role.name == "teacher"
       teacher = Teacher.find_by(user_id: current_user.id)
       @registrations = TeacherCourse.where(teacher_id: teacher.id)
+    end
+
+    if params[:sort]
+      @registrations = StudentCourse.where("student_id =? AND status_id !=?", current_user.student.id, 3).order(status_id: :asc)
     end
 
   end
@@ -61,6 +65,44 @@ class UsersController < ApplicationController
 
   def profile
     
+  end
+
+  def edit
+    @roles = Role.all
+  end
+
+  def update
+    @user = User.find_by(id: current_user.id)
+    if params[:date]
+      dob = params[:date]
+    else
+      dob = current_user.birthdate
+    end
+    @user.update(
+      first_name: params[:first_name],
+      last_name: params[:last_name],
+      email_address: params[:email],
+      password: params[:password],
+      password_confirmation: params[:password_confirmation],
+      photo: params[:photo],
+      phone_number: params[:phone],
+      birthdate: dob,
+      bio: params[:bio]
+      )
+
+    if current_user.role.name == "student"
+        student = Student.find_by(user_id: current_user.id)
+          student.update(
+          class_level: params[:class_level]
+          )
+      elsif current.role.name == "teacher"
+        teacher = Teacher.find_by(user_id: current_user.id)
+        teacher.update(
+          title: params[:job_title]
+          )
+      end
+    redirect_to "/profile"
+
   end
 
 end

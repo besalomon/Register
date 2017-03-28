@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
+  def authenticate_teacher!
+    redirect_to "/courses" unless current_user.role.name == "teacher" || current_user.role.name == "admin"
+  end
+
 end

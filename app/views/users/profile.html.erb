@@ -1,7 +1,7 @@
 <h1>Profile</h1>
 <div class = "row">
   <div class = "col-md-1" id = "p_image">
-    <img src = "<%= current_user.photo%>">
+    <img src = "<%= current_user.photo%>" id ="p_photo">
     <div id = "p_name">
       <center>
         <font color = "white"> 
@@ -16,5 +16,15 @@
   <div class = "col-md-1" id = "p_description">
     <h3><font color = "white"> <b>Role:</b><%= current_user.role.name %></font> <br> <br>
     <font color = "white"> <b>Biography:</b><%= current_user.bio %></font>
+  </div>
+
+  <div class = "col-md-1">
+    <a href="/profile/edit">
+    <button type="submit" class = "btn btn-primary"> Edit Profile</button>
+    </a>
+  </div>
+
+  <div>
+    <input ng-model="filterQuery" list="names" class="form-control">
   </div>
 </div>
