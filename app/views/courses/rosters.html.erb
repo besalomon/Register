@@ -1,3 +1,4 @@
+
 <style>
   table { border-collapse: collapse; }
   tr:nth-child(3) { border: solid thin; }
@@ -20,7 +21,21 @@
     <% end %>
   </div>
 
-  <h3>Roster for <b>"<%= @course_name %>"</b></h3>
+  <div class = "row">
+  <div class = "col-md-8">
+  <h3> Roster for <b>"<%= @course_name %>"</b></h3>
+  </div>
+
+  <div class = "col-md-4">
+  <b>Mark All:</b>
+    <div class="btn-group">
+      <button type="submit" class="btn btn-primary" onclick="setAccepted()">Accepted</button>
+      <button type="button" class="btn btn-primary" onclick="setRejected()">Rejected</button>
+      <button type="button" class="btn btn-primary" onclick = "setWaitlisted()">Waitlisted</button>
+      <button type="button" class="btn btn-primary" onclick ="setReset()">Reset</button>
+    </div>
+  </div>
+  </div>
 
   <table id = "rosterShow" border = "1">
     <tr>
@@ -30,6 +45,7 @@
       <th>Decision</th>
     </tr></h3>
     <%= form_tag "rosters", method: :patch do%>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
     <% @studentcourses.each do |studentcourse|%>
     <tr>
       <td id = "rostertd" ><%= studentcourse.student.user.first_name + " " + studentcourse.student.user.last_name %></td>
@@ -37,13 +53,13 @@
       <td id = "rostertd"> 
           <button class = "btn btn-success" disabled><%= studentcourse.status.name%> </button>
       </td>
-      <td>
-      <select name = "reg_info[]status" id ="current_status">
+      <td id = "rostertd">
+      <select name = "reg_info[]status" id ="current_status" class = "current_status">
         <option disabled="" selected="">
           Select
         </option>
         <% @stat.each do |status| %>
-            <option value = "<%= status.id %>">
+            <option value = "<%= status.id %>" id = "current_status">
               <%= status.name %>
             </option>
           
@@ -56,6 +72,7 @@
 
     <% end %>
   </table> <br>
-  <% select_tag "studentcourse", options_from_collection_for_select(@studentcourses, :status_id, :student_id) %>
-  <button>Update</button>
+  <button class = "btn btn-success">Update</button>
   <% end %>
+
+  

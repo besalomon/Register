@@ -25,6 +25,9 @@ Rails.application.routes.draw do
   get "profile", to:'users#profile'
   get "profile/edit", to:'users#edit' 
   patch "profile/edit", to:'users#update'
+  resources :courses do
+  collection { post :import }
+  end
   resources :departments
   resources :rooms
   namespace :api do

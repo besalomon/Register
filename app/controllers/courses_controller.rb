@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
- #before_action :authenticate_teacher!, except: [:index]
+ before_action :authenticate_teacher!, except: [:index, :show, :registration, :cancel_registration, :show_department]
 
   def index
     if params[:find]
@@ -16,7 +16,15 @@ class CoursesController < ApplicationController
       user = User.find_by(id:session[:user_id])
       @user = user
       
-      render :index
+    respond_to do |format|
+      format.html
+      format.csv { send_data @courses.to_csv }
+      format.xls # { send_data @products.to_csv(col_sep: "\t") }
+    end
+    end
+    def import
+      Course.import(params[:file])
+      redirect_to root_url, notice: "Courses imported."
     end
 
   end
@@ -76,6 +84,11 @@ class CoursesController < ApplicationController
     @department = Department.find_by(id:coursedep.department_id)
     course = StudentCourse.where("status_id=? AND course_id =?", 2, params[:id])
     @number = course.length
+    if current_user.role.name == "student"
+    @check = StudentCourse.where("student_id=? AND course_id =?", current_user.student.id, params[:id])
+    else
+      @check = nil
+    end
     render :show
   end
 
@@ -104,6 +117,7 @@ class CoursesController < ApplicationController
       department_id: params[:department_id]
       )
     @coursedep.save
+    redirect_to "/courses"
   else
     flash[:warning] = "Make sure all the fields are not empty"
   end

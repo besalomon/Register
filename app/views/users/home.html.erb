@@ -1,9 +1,9 @@
 <div id = "dashboardSM">
 <div class = "row">
-  <div class = "col-md-9"> 
+  <div class = "col-md-9" id = "my_courses"> 
     <h1> My Courses</h1>
   </div>
-
+<% if current_user.role.name == "student" %>
   <div class = "col-md-2"><br>
       <div class="btn-group" role="group" aria-label="..."> 
   <button type="button" class="btn btn-default"><a href = "/dashboard?sort=status">Sort by Status</a></button>
@@ -13,6 +13,7 @@
   </div>
   
 </div>
+<% end %>
 </div>
 <% @registrations.each_slice(3) do |four_registrations| %>
     <div class="row">

@@ -28,7 +28,7 @@ body {
 <tr>
 <h2><font color = "#566573"><%= link_to department.name, "/courses/departments/#{department.id}"%></font></h2>
 </tr>
-<% department.courses.each_slice(3) do |three_courses| %>
+<% department.courses.limit(4).each_slice(4) do |three_courses| %>
     <div class="row">
       <div class="col-md-1"> </div>
         <% three_courses.each do |course| %>
@@ -38,7 +38,7 @@ body {
             <center><h5><%= course.short_description %></h6></center><br>
             <center><button type="button" class = "btn btn-<%= ["success", "info", "danger", "primary", "warning"].sample %> btn-block" id = "reg")">Register</button></center>
           </div>
-          <div class="col-md-1"> </div> 
+          <div class="col-md-1" id = "md_spacer"> </div> 
         <% end %>
     </div>
 
@@ -68,10 +68,22 @@ body {
     </div>
 
 </div>
-  <% end %>
+  <% end %><br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> 
+  <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
 
 <% end %>
 
+
 </body>
-<h5><center><p>&copy; 2017 Register<p></center></h5>
+
 </html> 
+
+<div id = "footer">
+<p>
+  Download:
+  <%= link_to "CSV", courses_path(format: "csv") %> |
+  <%= link_to "Excel", courses_path(format: "xls") %>
+</p>
+
+<h5><center><p>&copy; 2017 Register<p></center></h5>
+</div>

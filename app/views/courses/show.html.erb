@@ -16,6 +16,14 @@
             });
         });
       </script>
+
+      <script>
+        $(document).ready(function(){
+            $("#show2").click(function(){
+                $("#ele2").toggle();
+            });
+        });
+      </script>
     </head>
     <body>
       <div class = "row">
@@ -26,18 +34,18 @@
           <center><h2><font color="#99A3A4"><%= @course.name %></font></h2></center>
         </div>
 
-        <div class = "col-md-1" id = "edit_course">
-        <span class="glyphicon glyphicon-pencil" aria-hidden="true"><a href= "<%= params[:id]%>/edit"><h5>Edit Course</h5></a>
-
-        </span>
+        <div class = "col-md-2" id = "edit_course">
+        <br>
+        
+          <div class="btn-group">
+          <% if current_user.role.name == "teacher" || current_user.role.name == "admin" %>
+            <button type ="submit" class="btn btn-primary"><a href= "<%= params[:id]%>/edit"><font color="white">Edit Course</font></a></button>
+          <% end %>
+            
+          </div>
           
         </div>
         
-        <div class = "col-md-1">
-          <a href= "/courses/<%= params[:id]%>/cancel"><h5>Cancel Registration</h5></a>
-        </div>
-      </div>
-
       <br>
       <div class="container">
         <div class="row">
@@ -66,10 +74,19 @@
                <center> <div>
                   Number of students in the class: <%= @number %> <br><br>
                   Course Teacher: TBD<br><br><br><br>
-                  <button type="button" class = "btn btn-<%= ["success", "info", "danger", "primary", "warning"].sample %> btn-block reg")" id = "show">
+
+                  <% if @check && @check.first %>
+                    <button type="button" class = "btn btn-danger %> btn-block reg")" id = "show2">
+
+                  <span class="glyphicon glyphicon-plus"></span> Cancel Registration
+                  </button> 
+                  <% else %>
+                  <button type="button" class = "btn btn-primary %> btn-block reg")" id = "show">
 
                   <span class="glyphicon glyphicon-plus"></span> Register Now
-                  </button>
+                  </button> 
+                  <% end %>
+
                 </div></center>
               </div>
           </div>
@@ -99,6 +116,30 @@
         <hr>
       </div>
       </div>
+
+      <div class="form-group" id = "ele2" hidden>
+      <div class = "row">
+        <div class = "col-md-4"> </div>
+        <div class = "col-md-2">
+          <label for="full_name">Full Name</label>
+          <input type="text" class="form-control" id="usr" value = "<%= current_user.first_name + " " + current_user.last_name%>" disabled = "true" name = "full_name"></p>
+        </div>
+        <div class = "col-md-2">
+          <label for="full_name">Email</label>
+          <p align = "right"><input type="text" class="form-control" id="usr" value = "<%= current_user.email_address%>" disabled = "true" name = "Email"></p>
+        </div><br>
+        
+        <div class = "col-md-1">
+             <%= form_tag "/courses/#{@course.id}/cancel", method: :delete do %>
+      <button class = "btn btn-success"> 
+        <span class="glyphicon glyphicon-ok"></span> Confirm 
+      </button>
+          <% end %>
+        </div>
+        <hr>
+      </div>
+      </div>
+
 
       <br><br><br><br><br>
       <h5><center><p>&copy; 2017 Register<p></center></h5>
