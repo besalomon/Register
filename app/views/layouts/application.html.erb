@@ -38,7 +38,11 @@ body {
     <div class = "col-md-5" id = "headerEnd"> <br>
       <ul class="nav nav-pills" role="tablist" id= "menu">
         <li role="presentation"><a href="/profile"> Hello, <%= current_user.last_name %>!</a></li>
+        <% if current_user && current_user.role.name == "admin" %>
+          <li role="presentation"><a href="/settings">Settings</a></li>
+        <% elsif current_user %>
         <li role="presentation"><a href="/dashboard">Dashboard</a></li>
+        <% end %>
         <li role="presentation"><%= link_to "Log Out", "/logout", method: :delete %></li>
       </ul>
     </div>

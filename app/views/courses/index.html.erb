@@ -17,6 +17,11 @@ body {
 
 <% if params[:find] == "" %>
 <center><h2><font color="#99A3A4">Choose courses per category</font></h2></center>
+<% if current_user.role.name == "admin" || current_user.role.name == "teacher" %>
+  <%= form_tag"/courses/new", method: :get do %>
+    <button type="submit" class = "btn btn-primary"> New Course </button>
+  <% end%>
+<%end%>
 <div ng-controller="AppCtrl" ng-cloak>
 <md-content>
 <md-button class="md-raised md-primary">Primary</md-button>
@@ -36,7 +41,7 @@ body {
           <center><img src="<%= course.cover%>" class="img-responsive" id = "img"></center><br>
            <center><b><%= link_to course.name.upcase, "/courses/#{course.id}" %></b></font></center>
             <center><h5><%= course.short_description %></h6></center><br>
-            <center><button type="button" class = "btn btn-<%= ["success", "info", "danger", "primary", "warning"].sample %> btn-block" id = "reg")">Register</button></center>
+            <center><button type="button" class = "btn btn-<%= ["success", "info", "danger", "primary", "warning"].sample %> btn-block" id = "reg")"><a href = "/courses/<%= course.id %>"><font color = "white">Register</font></a></button></center>
           </div>
           <div class="col-md-1" id = "md_spacer"> </div> 
         <% end %>
@@ -53,7 +58,7 @@ body {
 
 <h1>Search Results</h1>
 
-<% @courses.each_slice(3) do |three_courses| %>
+<% @courses.each_slice(4) do |three_courses| %>
     <div class="row">
       <div class="col-md-1"> </div>
         <% three_courses.each do |course| %>
@@ -61,7 +66,7 @@ body {
           <center><img src="<%= course.cover%>" class="img-responsive" id = "img"></center><br>
            <center><b><%= link_to course.name.upcase, "/courses/#{course.id}" %></b></font></center>
             <center><h5><%= course.short_description %></h6></center><br>
-            <center><button type="button" class = "btn btn-<%= ["success", "info", "danger", "primary", "warning"].sample %> btn-block" id = "reg")">Register</button></center>
+            <center><button type="button" class = "btn btn-<%= ["success", "info", "danger", "primary", "warning"].sample %> btn-block" id = "reg")"><a href = "/courses/<%course.id%>"><font color = "white">Register</font></a></button></center>
           </div>
           <div class="col-md-1"> </div> 
         <% end %>

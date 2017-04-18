@@ -174,7 +174,7 @@ class CoursesController < ApplicationController
       teacher = Teacher.find_by(user_id: current_user.id)
       teacher_id = teacher.id
       check_roster = TeacherCourse.where("teacher_id =? AND course_id =?", current_user.teacher.id, params[:id])
-      if check_roster
+      if check_roster && check_roster.first
         flash[:warning] = "You are already registered in that course"
         redirect_to "/courses"
       else
@@ -185,6 +185,7 @@ class CoursesController < ApplicationController
           )
         if @registration.save
           flash[:success] = "Registration Successful"
+          redirect_to "/dashboard"
         end
       end
     end
